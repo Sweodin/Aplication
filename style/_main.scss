@@ -1,0 +1,79 @@
+@import "utils/variables";
+@import "utils/mixins";
+
+.container {
+  @include container-style();
+}
+
+.card-container {
+  @include card-container-style();
+}
+
+.card {
+  @include card-style($width: calc(30% - 20px), $height: 250px);
+
+  &.wide {
+    @include card-style($width: calc(50% - 15px), $height: auto);
+  }
+
+  &.open {
+    @include card-open-style($width: 70%, $height: auto);
+  }
+}
+
+#personal-letter {
+  background-color: rgba(0, 0, 0, 0.8);
+  &.open {
+    @include card-open-style(
+      $width: 70%,
+      $max-width: 100%,
+      $height: auto,
+      $max-height: 100vh,
+      $background-color: rgba(0, 0, 0, 0.9),
+      $z-index: 1000
+    );
+    background: url("/img/penny.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-blend-mode: overlay;
+    color: $secondary-color;
+    padding: 20px;
+    overflow-y: auto;
+
+    .card-headline {
+      text-align: center;
+      font-size: $font-size-h2;
+      padding-bottom: 20px;
+      color: $secondary-color;
+      z-index: 1001;
+      padding: 10px;
+    }
+
+    .card-text {
+      color: $accent-color;
+      padding: 10px;
+    }
+  }
+}
+
+.card-headline {
+  @include card-headline-style();
+}
+
+.card-text {
+  @include card-text-style();
+
+  /*----- Display block when card is open -----*/
+
+  .card.open & {
+    display: block;
+    padding: 10px;
+    font-size: $font-size-p;
+  }
+}
+
+.disable {
+  display: none;
+}
+
